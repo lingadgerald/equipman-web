@@ -1,0 +1,24 @@
+{
+	"fields": [
+		{
+			"key": "username",
+			"type": "input-login",
+			"templateOptions": {"type": "text", "label": "Username"}
+		},
+		{
+			"key": "email",
+			"type": "input-login",
+			"templateOptions": {"type": "email", "label": "Email Address"}
+		},
+		{
+			"key": "password",
+			"type": "input-login",
+			"templateOptions": {"type": "password", "label": "Password"}
+		},
+		{
+			"key": "passwordConfirmation",
+			"type": "input-login",
+			"templateOptions": {"type": "password", "label": "Confirm Password"}
+		}
+	]
+}

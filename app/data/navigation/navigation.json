@@ -1,0 +1,9 @@
+{
+	"nav": [
+		{"title": "Home", "state": "app.home"},
+		{"title": "Members", "state": "app.members"},
+		{"title": "Ministry", "state": "app.ministries"},
+		{"title": "Items", "state": "app.items"},
+		{"title": "Events", "state": "app.events"}
+	]
+}

@@ -1,0 +1,74 @@
+{
+"tabs": [
+    {"label": "Edit Profile", "model": "edit_profile"},
+    {"label": "Change Password", "model": "change_password"}
+  ],
+  "tabData": {
+    "edit_profile": {
+      "name": "edit_profile",
+      "heading": "Profile",
+      "title": "Profile",
+      "icon": "fa-user",
+      "model": "member",
+      "tableRelations": "user,user.ministry,user.role",
+      "requiredFields": ["firstname", "lastname", "name"],
+      "formFields": [
+        {
+          "key": "firstname",
+          "type": "input-horizontal-less",
+          "templateOptions": {"type": "text", "label": "First Name", "required": true},
+          "hideExpression": "formState.currentUser.username === 'admin'"
+        },
+        {
+          "key": "lastname",
+          "type": "input-horizontal-less",
+          "templateOptions": {"type": "text", "label": "Last Name", "required": true},
+          "hideExpression": "formState.currentUser.username === 'admin'"
+        },
+        {
+          "key": "email",
+          "type": "input-horizontal-less",
+          "templateOptions": {"type": "text", "label": "Email Address", "disabled": true}
+        },
+        {
+          "key": "ministry.name",
+          "type": "input-horizontal-less",
+          "templateOptions": {"type": "text", "label": "Ministry", "disabled": true},
+          "hideExpression": "formState.currentUser.username === 'admin'"
+        },
+        {
+          "key": "role.name",
+          "type": "input-horizontal-less",
+          "templateOptions": {"type": "text", "label": "Role", "disabled": true},
+          "hideExpression": "formState.currentUser.username === 'admin'"
+        }
+      ]
+    },
+    "change_password": {
+      "name": "change_password",
+      "heading": "Profile",
+      "title": "Profile",
+      "icon": "fa-user",
+      "model": "user",
+      "tableRelations": "user",
+      "requiredFields": ["password"],
+      "formFields": [
+        {
+          "key": "currentPassword",
+          "type": "input-horizontal-less",
+          "templateOptions": {"type": "password", "label": "Current Password", "required": true}
+        },
+        {
+          "key": "password",
+          "type": "input-horizontal-less",
+          "templateOptions": {"type": "password", "label": "New Password", "required": true}
+        },
+        {
+          "key": "confirmPassword",
+          "type": "input-horizontal-less",
+          "templateOptions": {"type": "password", "label": "Confirm Password", "required": true}
+        }
+      ]
+    }
+  }
+}

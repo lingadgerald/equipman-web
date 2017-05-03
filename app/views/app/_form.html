@@ -1,0 +1,45 @@
+<div class="container-fluid">
+	<div class="page-header p-0 mt-0">
+		<div class="h2 mt-0">
+			<i ng-if="ctrl.icon" class="fa fa-fw {{ctrl.icon}}"></i>
+			{{ctrl.heading}}
+		</div>
+	</div>
+	<div class="panel with-nav-tabs panel-primary">
+
+		<div class="panel-heading">
+			<ul class="nav nav-tabs">
+				<li ng-repeat="tab in ctrl.tabs"
+						ng-class="{'active': tab.model === ctrl.active}">
+					<a href="" data-toggle="tab" ng-click="ctrl.tabReload(tab)"
+						 ng-class="{'disabled': tab.model === ctrl.active}">
+						{{tab.label}}
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="panel-body">
+			<div class="container">
+				<form class="form-horizontal" ng-submit="ctrl.onSubmit" name="ctrl.form">
+					<fieldset ng-disabled="ctrl.loading">
+						<formly-form model="ctrl.model"
+												 fields="ctrl.fields"
+												 options="ctrl.options">
+							<div class="text-right">
+								<span ng-show="ctrl.loading">
+									<i class="fa fa-fw fa-lg fa-spinner fa-pulse"></i>&nbsp;
+								</span>
+								<button type="button" class="btn btn-default">Cancel</button>
+								<button type="submit" class="btn btn-primary text-capitalize">
+									{{::ctrl.btnAction || 'Submit'}}
+								</button>
+							</div>
+						</formly-form>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+
+	</div>
+</div>

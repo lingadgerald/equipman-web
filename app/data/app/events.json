@@ -1,0 +1,66 @@
+{
+	"name": "event",
+	"heading": "Events",
+	"title": "Event",
+	"model": "event",
+	"icon": "fa-calendar-o",
+	"tabs": [
+		{
+			"label": "Active",
+			"model": "active",
+			"buttons": [
+				{"label": "Details", "model": "state", "state": "app.events.details"},
+				{"label": "View", "model": "view", "icon": "fa-eye"},
+				{"label": "Edit", "model": "edit", "icon": "fa-pencil"},
+				{"label": "Delete", "model": "delete", "icon": "fa-trash-o"}
+			]
+		},
+		{
+			"label": "Inactive",
+			"model": "inactive",
+			"buttons": [
+				{"label": "Attendance", "model": "view"},
+				{"label": "Items", "model": "state", "state": "app.events.items"},
+				{"label": "View", "model": "view", "icon": "fa-eye"},
+				{"label": "Retrieve", "model": "retrieve", "icon": "fa-undo"},
+				{"label": "Delete", "model": "destroy", "icon": "fa-trash-o"}
+			]
+		}
+	],
+	"tableFields": [
+		{"label": "Name", "model": "name", "sort": "name"},
+		{"label": "Location", "model": "location", "sort": "location"},
+		{"label": "Date", "model": "eventDate", "type": "date", "sort": "eventDate"},
+		{"label": "Description", "model": "description", "sort": "description"}
+	],
+	"requiredFields": ["code", "name", "location", "eventDate", "description"],
+	"searchFields": ["name", "location", "description"],
+	"searchFields": {
+		"name": {"cond": "cn"},
+		"location": {"cond": "cn"},
+		"eventDate": {"cond": "eq"},
+		"description": {"cond": "cn"}
+	},
+	"formFields": [
+		{
+			"key": "name",
+			"type": "input-horizontal",
+			"templateOptions": {"type": "text", "label": "Name", "required": true}
+		},
+		{
+			"key": "location",
+			"type": "input-horizontal",
+			"templateOptions": {"type": "text", "label": "Location", "required": true}
+		},
+		{
+			"key": "eventDate",
+			"type": "datepicker",
+			"templateOptions": {"type": "text", "label": "Date", "minDate": 0, "required": true}
+		},
+		{
+			"key": "description",
+			"type": "textarea-horizontal",
+			"templateOptions": {"label": "Description", "rows": 3}
+		}
+	]
+}

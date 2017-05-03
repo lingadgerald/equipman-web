@@ -1,0 +1,86 @@
+<div id="login" class="container height-100" ng-class="{'p-0': ctrl.xsMedia}">
+	<div class="page-header" ng-if="ctrl.smMedia">
+		<div class="h1">Equipman</div>
+	</div>
+			
+	<form ng-submit="ctrl.onSubmit()" method="post" role="form" novalidate>
+		<div class="panel panel-primary">
+
+			<div class="panel-heading">
+				<div class="panel-title">
+					<i style="cursor: pointer;" 
+						 ng-if="ctrl.name !== 'login'"
+						 ui-sref="auth.login"
+						 class="fa fa-angle-left pr-10">
+					</i>
+					<span ng-if="ctrl.smMedia">{{ctrl.title}}</span>
+					<span ng-if="ctrl.xsMedia">Equipman | {{ctrl.title}}</span>
+				</div>
+			</div>
+
+			<div class="panel-body">
+				<div class="col-sm-4">
+					<div class="logo text-center">
+						<img src="images/equipman.png" alt="EquipMan" height="auto"
+								 ng-class="{'width-50': ctrl.xsMedia, 'width-75': ctrl.smMedia}">
+						<p>A multi-platform equipment tracker and inventory system</p>
+					</div>
+				</div>
+				<div class="col-sm-8" ng-class="{'p-0': ctrl.xsMedia}">
+					<div class="pv-8 error-message text-danger" ng-if="!!ctrl.message"
+							 ng-class="{'text-center': ctrl.xsMedia}">
+						<span>{{ctrl.message.message}}</span>
+					</div>
+					<fieldset ng-disabled="ctrl.loading" class="p-0 m-0" style="border: 0;">
+						<formly-form form="ctrl.form"
+												 model="ctrl.model"
+												 fields="ctrl.fields"
+												 options="ctrl.options">
+							<div class="form-group">
+								<button type="submit"
+												class="btn btn-primary"
+												ng-class="{'btn-block btn-lg': ctrl.xsMedia}"
+												ng-disabled="ctrl.loading">
+									<span ng-if="ctrl.loading && ctrl.xsMedia">
+										<i class="fa fa-spinner fa-pulse"></i>
+									</span>
+									<span ng-if="!ctrl.loading && ctrl.xsMedia">{{ctrl.formBtn}}</span>
+									<span ng-if="ctrl.smMedia">{{ctrl.formBtn}}</span>
+								</button>
+								<span ng-if="ctrl.loading && ctrl.smMedia" class="m-10"
+											style="vertical-align: middle;">
+									<i class="fa fa-spinner fa-pulse"></i>
+								</span>
+								<a class="btn btn-link"
+									 ui-sref="auth.forgot_password"
+									 ng-disabled="ctrl.loading"
+									 ng-if="ctrl.name === 'login'"
+									 ng-class="{'pull-right': ctrl.smMedia, 'btn-block': ctrl.xsMedia}">
+									Forgot Password
+								</a>
+							</div>
+						</formly-form>
+					</fieldset>
+				</div>
+			</div>
+
+			<!-- <div class="panel-footer">
+				<button type="submit"
+								class="btn btn-default btn-block btn-lg"
+								ng-disabled="ctrl.loading">
+					<span ng-if="ctrl.loading"><i class="fa fa-spinner fa-pulse"></i></span>
+					<span ng-if="!ctrl.loading">{{ctrl.title}}</span>
+				</button>
+				<div class="text-center">
+					<a class="btn btn-link"
+									ng-click="ctrl.forgotPassword()"
+									ng-disabled="ctrl.loading">
+						Forgot Password
+					</a>
+				</div>
+			</div> -->
+
+		</div>
+	</form>
+
+</div>

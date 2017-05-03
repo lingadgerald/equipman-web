@@ -1,0 +1,67 @@
+{
+	"name": "ministry",
+	"heading": "Ministries",
+	"title": "Ministry",
+	"model": "ministry",
+	"icon": "fa-university",
+	"tabs": [
+		{
+			"label": "Active",
+			"model": "active",
+			"buttons": [
+				{"label": "View", "model": "view", "icon": "fa-eye"},
+				{"label": "Edit", "model": "edit", "icon": "fa-pencil"},
+				{"label": "Delete", "model": "delete", "icon": "fa-trash-o"}
+			]
+		},
+		{
+			"label": "Inactive",
+			"model": "inactive",
+			"buttons": [
+				{"label": "View", "model": "view", "icon": "fa-eye"},
+				{"label": "Retrieve", "model": "retrieve", "icon": "fa-undo"},
+				{"label": "Delete", "model": "destroy", "icon": "fa-trash-o"}
+			]
+		}
+	],
+	"tableFields": [
+		{"label": "Name", "model": "name", "sort": "name"},
+		{"label": "Head Person", "model": "headPerson.name"},
+		{"label": "Description", "model": "description", "sort": "description"}
+	],
+	"requiredFields": ["code", "name", "headPerson", "description"],
+	"tableRelations": "headPerson",
+	"searchFields": {
+		"name": {"cond": "cn"},
+		"headPerson.name": {"cond": "cn"},
+		"description": {"cond": "cn"}
+	},
+	"formFields": [
+		{
+			"key": "name",
+			"type": "input-horizontal",
+			"templateOptions": {"type": "text", "label": "Name", "required": true}
+		},
+		{
+			"key": "headPerson",
+			"type": "select-horizontal",
+			"templateOptions": {
+				"label": "Head Person",
+				"liveSearch": true,
+				"dataSize": 7,
+				"options": [],
+				"optionProperties": {
+					"resource": "data.member",
+					"conditions": {
+						"where": "deleted is null"
+					}
+				}
+			}
+		},
+		{
+			"key": "description",
+			"type": "textarea-horizontal",
+			"templateOptions": {"label": "Description", "rows": 3}
+		}
+	]
+}

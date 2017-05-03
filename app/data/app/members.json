@@ -1,0 +1,99 @@
+{
+	"name": "member",
+	"heading": "Members",
+	"title": "Member",
+	"model": "member",
+	"icon": "fa-users",
+	"tabs": [
+		{
+			"label": "Active",
+			"model": "active",
+			"buttons": [
+				{"label": "Resend Email", "model": "resend_email", "icon": "fa-envelope", "disabled": "data.activated"},
+				{"label": "View", "model": "view", "icon": "fa-eye"},
+				{"label": "Edit", "model": "edit", "icon": "fa-pencil"},
+				{"label": "Delete", "model": "delete", "icon": "fa-trash-o"}
+			]
+		},
+		{
+			"label": "Inactive",
+			"model": "inactive",
+			"buttons": [
+				{"label": "View", "model": "view", "icon": "fa-eye"},
+				{"label": "Retrieve", "model": "retrieve", "icon": "fa-undo"},
+				{"label": "Delete", "model": "destroy", "icon": "fa-trash-o"}
+			]
+		}
+	],
+	"tableFields": [
+		{"label": "Name", "model": "name", "sort": "name"},
+		{"label": "Email Address", "model": "email", "sort": "email"},
+		{"label": "Ministry", "model": "ministry.name"},
+		{"label": "Role", "model": "role.name"},
+		{"label": "Activated At", "model": "activated", "type": "date"}
+	],
+	"requiredFields": ["name", "firstname", "lastname", "email", "ministry", "role"],
+	"tableRelations": "ministry,role",
+	"searchFields": {
+		"name": {"cond": "cn"},
+		"email": {"cond": "cn"},
+		"ministry.name": {"cond": "cn"},
+		"role.name": {"cond": "cn"}
+	},
+	"formFields": [
+		{
+			"key": "firstname",
+			"type": "input-horizontal",
+			"templateOptions": {"type": "text", "label": "First Name", "required": true},
+			"expressionProperties": {
+				"templateOptions.disabled": "!!model.activated"
+			}
+		},
+		{
+			"key": "lastname",
+			"type": "input-horizontal",
+			"templateOptions": {"type": "text", "label": "Last Name", "required": true},
+			"expressionProperties": {
+				"templateOptions.disabled": "!!model.activated"
+			}
+		},
+		{
+			"key": "email",
+			"type": "input-horizontal",
+			"templateOptions": {"type": "email", "label": "Email Address", "required": true},
+			"expressionProperties": {
+				"templateOptions.disabled": "!!model.activated"
+			}
+		},
+		{
+			"key": "ministry",
+			"type": "select-horizontal",
+			"templateOptions": {
+				"label": "Ministry",
+				"liveSearch": true,
+				"dataSize": 7,
+				"options": [],
+				"optionProperties": {
+					"resource": "data.ministry",
+					"conditions": {
+						"where": "deleted is null"
+					}
+				}
+			}
+		},
+		{
+			"key": "role",
+			"type": "select-horizontal",
+			"templateOptions": {
+				"label": "Role",
+				"liveSearch": true,
+				"dataSize": 7,
+				"options": [],
+				"optionProperties": {
+					"resource": "data.role",
+					"conditions": {}
+				}
+			}
+		}
+	]
+}

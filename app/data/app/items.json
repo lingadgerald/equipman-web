@@ -1,0 +1,140 @@
+{
+	"name": "item",
+	"heading": "Items",
+	"title": "Item",
+	"model": "item",
+	"icon": "fa-shopping-bag",
+	"tabs": [
+		{
+			"label": "Active",
+			"model": "active",
+			"buttons": [
+				{"label": "View", "model": "view", "icon": "fa-eye"},
+				{"label": "Edit", "model": "edit", "icon": "fa-pencil"},
+				{"label": "Delete", "model": "delete", "icon": "fa-trash-o"}
+			]
+		},
+		{
+			"label": "Inactive",
+			"model": "inactive",
+			"buttons": [
+				{"label": "View", "model": "view", "icon": "fa-eye"},
+				{"label": "Retrieve", "model": "retrieve", "icon": "fa-undo"},
+				{"label": "Delete", "model": "destroy", "icon": "fa-trash-o"}
+			]
+		}
+	],
+	"tableFields": [
+		{"label": "Image", "model": "image", "type": "image"},
+		{"label": "Name", "model": "name", "sort": "name"},
+		{"label": "Item Id", "model": "itemId", "sort": "itemId"},
+		{"label": "Ministry", "model": "ministry.name"},
+		{"label": "Owner", "model": "ownerVal", "type": "owner"},
+		{"label": "Last Checked In By", "model": "checkedInBy.name"},
+		{"label": "Last Checked Out By", "model": "checkedOutBy.name"}
+	],
+	"requiredFields": [
+		"name", "itemId", "image", "condition", "description", "ministry",
+		"ownerVal", "ownerMember", "ownerMinistry", "code"
+	],
+	"tableRelations": "ministry,ownerMinistry,ownerMember,checkedInBy,checkedOutBy",
+	"searchFields": {
+		"name": {"cond": "cn"},
+		"itemId": {"cond": "cn"},
+		"condition": {"cond": "cn"},
+		"description": {"cond": "cn"},
+		"ministry.name": {"cond": "cn"},
+		"ownerMinistry.name": {"cond": "cn"},
+		"ownerMember.name": {"cond": "cn"}
+	},
+	"formFields": [
+		{
+			"key": "image",
+			"type": "image-base64-horizontal",
+			"templateOptions": {"type": "text", "label": "Image"}
+		},
+		{
+			"key": "name",
+			"type": "input-horizontal",
+			"templateOptions": {"type": "text", "label": "Name", "required": true}
+		},
+		{
+			"key": "itemId",
+			"type": "input-horizontal",
+			"templateOptions": {"type": "text", "label": "Item Id"}
+		},
+		{
+			"key": "ministry",
+			"type": "select-horizontal",
+			"templateOptions": {
+				"label": "Ministry",
+				"liveSearch": true,
+				"dataSize": 7,
+				"options": [],
+				"optionProperties": {
+					"resource": "data.ministry",
+					"conditions": {
+						"where": "deleted is null"
+					}
+				},
+				"required": true
+			}
+		},
+		{
+			"key": "ownerVal",
+			"type": "select-horizontal",
+			"templateOptions": {
+				"label": "Owner Type",
+				"options": [
+					{"name": "Ministry", "value": "ministry"},
+					{"name": "Member", "value": "member"}
+				]
+			},
+			"hideExpression": "formState.action === 'view'"
+		},
+		{
+			"key": "ownerMember",
+			"type": "select-horizontal",
+			"templateOptions": {
+				"label": "Owner Member",
+				"liveSearch": true,
+				"dataSize": 7,
+				"options": [],
+				"optionProperties": {
+					"resource": "data.member",
+					"conditions": {
+						"where": "deleted is null"
+					}
+				}
+			},
+			"hideExpression": "!(model.ownerVal === 'member')"
+		},
+		{
+			"key": "ownerMinistry",
+			"type": "select-horizontal",
+			"templateOptions": {
+				"label": "Owner Ministry",
+				"liveSearch": true,
+				"dataSize": 7,
+				"options": [],
+				"optionProperties": {
+					"resource": "data.ministry",
+					"conditions": {
+						"where": "deleted is null"
+					}
+				}
+			},
+			"hideExpression": "!(model.ownerVal === 'ministry')"
+		},
+		{
+			"key": "condition",
+			"type": "input-horizontal",
+			"templateOptions": {"type": "text", "label": "Condition"}
+		},
+		{
+			"key": "description",
+			"type": "textarea-horizontal",
+			"templateOptions": {"label": "Description", "rows": 3}
+		}
+	]
+}

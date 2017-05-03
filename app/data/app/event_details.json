@@ -1,0 +1,202 @@
+{
+  "tabs": [
+    {
+      "label": "Items",
+      "model": "items",
+      "buttons": [{"label": "Views", "model": "view", "icon": "fa-eye"}]
+    },
+    {
+      "label": "Attendance",
+      "model": "attendance",
+      "buttons": [{"label": "Views", "model": "view", "icon": "fa-eye"}]
+    }
+  ],
+  "tabData": {
+    "items": {
+      "name": "event_item",
+      "backButton": "app.events",
+      "title": "Item",
+      "icon": "fa-calendar-o",
+      "model": "event",
+      "modalModel": "item",
+      "tableRelations": "items,items.ministry,items.ownerMinistry,items.ownerMember,items.logs",
+      "modalTableRelations": "ministry,ownerMinistry,ownerMember",
+      "requiredFields": ["name", "event", "items"],
+      "searchFields": {
+        "name": {"cond": "cn"},
+        "itemId": {"cond": "cn"},
+        "condition": {"cond": "cn"},
+        "description": {"cond": "cn"},
+        "ministry.name": {"cond": "cn"},
+        "ownerMinistry.name": {"cond": "cn"},
+        "ownerMember.name": {"cond": "cn"}
+      },
+      "modalSearchFields": {
+        "name": {"cond": "cn"},
+        "itemId": {"cond": "cn"},
+        "condition": {"cond": "cn"},
+        "description": {"cond": "cn"},
+        "ministry.name": {"cond": "cn"},
+        "ownerMinistry.name": {"cond": "cn"},
+        "ownerMember.name": {"cond": "cn"}
+      },
+      "tableFields": [
+        {"label": "Image", "model": "image", "type": "image"},
+        {"label": "Name", "model": "name", "sort": "name"},
+        {"label": "Item Id", "model": "itemId", "sort": "itemId"},
+        {"label": "Ministry", "model": "ministry.name"},
+        {"label": "Owner", "model": "ownerVal", "type": "owner"},
+        {"label": "Condition", "model": "condition", "sort": "condition"},
+        {"label": "Checked In By", "model": "logs", "view": "checkedInBy", "type": "itemLogs"},
+        {"label": "Checked Out By", "model": "logs", "view": "checkedOutBy", "type": "itemLogs"}
+      ],
+      "modalTableFields": [
+        {"label": "Image", "model": "image", "type": "image"},
+        {"label": "Name", "model": "name", "sort": "name"},
+        {"label": "Item Id", "model": "itemId", "sort": "itemId"},
+        {"label": "Ministry", "model": "ministry.name"},
+        {"label": "Owner", "model": "ownerVal", "type": "owner"},
+        {"label": "Condition", "model": "condition", "sort": "condition"}
+      ],
+      "formFields": [
+        {
+          "key": "image",
+          "type": "image-base64-horizontal",
+          "templateOptions": {"type": "text", "label": "Image"}
+        },
+        {
+          "key": "name",
+          "type": "input-horizontal",
+          "templateOptions": {"type": "text", "label": "Name", "required": true}
+        },
+        {
+          "key": "itemId",
+          "type": "input-horizontal",
+          "templateOptions": {"type": "text", "label": "Item Id", "required": true}
+        },
+        {
+          "key": "ministry",
+          "type": "select-horizontal",
+          "templateOptions": {
+            "label": "Ministry",
+            "liveSearch": true,
+            "dataSize": 7,
+            "options": [],
+            "optionProperties": {
+              "resource": "data.ministry",
+              "conditions": {"where": "deleted is null"}
+            }
+          }
+        },
+        {
+          "key": "ownerMember",
+          "type": "select-horizontal",
+          "templateOptions": {
+            "label": "Owner",
+            "liveSearch": true,
+            "dataSize": 7,
+            "options": [],
+            "optionProperties": {
+              "resource": "data.member",
+              "conditions": {"where": "deleted is null"}
+            }
+          },
+          "hideExpression": "!(model.ownerVal === \"member\")"
+        },
+        {
+          "key": "ownerMinistry",
+          "type": "select-horizontal",
+          "templateOptions": {
+            "label": "Owner",
+            "liveSearch": true,
+            "dataSize": 7,
+            "options": [],
+            "optionProperties": {
+              "resource": "data.ministry",
+              "conditions": {"where": "deleted is null"}
+            }
+          },
+          "hideExpression": "!(model.ownerVal === \"ministry\")"
+        },
+        {
+          "key": "condition",
+          "type": "input-horizontal",
+          "templateOptions": {"type": "text", "label": "Condition"}
+        },
+        {
+          "key": "description",
+          "type": "textarea-horizontal",
+          "templateOptions": {"label": "Description", "rows": 3}
+        }
+      ]
+    },
+    "attendance": {
+      "name": "event_attendance",
+      "backButton": "app.events",
+      "title": "Attendance",
+      "icon": "fa-calendar-o",
+      "model": "event",
+      "modalModel": "member",
+      "tableRelations": "attendance,attendance.ministry,attendance.role",
+      "modalTableRelations": "ministry,role",
+      "requiredFields": [],
+      "searchFields": {
+        "name": {"cond": "cn"},
+        "email": {"cond": "cn"},
+        "ministry.name": {"cond": "cn"},
+        "role.name": {"cond": "cn"}
+      },
+      "tableFields": [
+        {"label": "Name", "model": "name", "sort": "name"},
+        {"label": "Email Address", "model": "email", "sort": "email"},
+        {"label": "Ministry", "model": "ministry.name"},
+        {"label": "Role", "model": "role.name"}
+      ],
+      "formFields": [
+        {
+          "key": "firstname",
+          "type": "input-horizontal",
+          "templateOptions": {"type": "text", "label": "First Name", "disabled": true}
+        },
+        {
+          "key": "lastname",
+          "type": "input-horizontal",
+          "templateOptions": {"type": "text", "label": "Last Name", "disabled": true}
+        },
+        {
+          "key": "email",
+          "type": "input-horizontal",
+          "templateOptions": {"type": "text", "label": "Email Address", "disabled": true}
+        },
+        {
+          "key": "ministry",
+          "type": "select-horizontal",
+          "templateOptions": {
+            "label": "Ministry",
+            "liveSearch": true,
+            "dataSize": 7,
+            "options": [],
+            "optionProperties": {
+              "resource": "data.ministry",
+              "conditions": {"where": "deleted is null"}
+            }
+          }
+        },
+        {
+          "key": "role",
+          "type": "select-horizontal",
+          "templateOptions": {
+            "label": "Role",
+            "liveSearch": true,
+            "dataSize": 7,
+            "options": [],
+            "optionProperties": {
+              "resource": "data.role",
+              "conditions": {"where": "deleted is null"}
+            }
+          }
+        }
+      ]
+    }
+  }
+}

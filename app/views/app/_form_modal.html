@@ -1,0 +1,48 @@
+<div class="modal-header modal-header primary"
+     ng-class="{
+      'danger': ctrl.action === 'delete' || ctrl.action === 'destroy'
+     }">
+  <button type="button" class="close" ng-click="ctrl.cancel()" ng-disabled="ctrl.loading">
+    &times;
+  </button>
+  <h4 class="modal-title text-capitalize">
+    <i class="fa fa-fw {{::ctrl.icon}}"></i> {{::ctrl.action}} {{::ctrl.tableData.title}}
+  </h4>
+</div>
+
+<form class="form-horizontal" ng-submit="ctrl.sendData()" name="ctrl.form">
+  <fieldset ng-disabled="ctrl.loading">
+    <div class="modal-body">
+      <formly-form ng-if="!ctrl.condition"
+                   model="ctrl.model"
+                   fields="ctrl.fields"
+                   options="ctrl.options">
+      </formly-form>
+      <div ng-if="ctrl.condition">
+        <p>
+          Are you sure you want to {{::ctrl.action}} {{::ctrl.modelName}}
+          {{::ctrl.title}} <b><i>{{::ctrl.deleteName}}</i></b> ?
+        </p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="text-right">
+        <span ng-show="ctrl.loading">
+          <i class="fa fa-fw fa-lg fa-spinner fa-pulse"></i>&nbsp; 
+        </span>
+        <button type="button" class="btn btn-default" ng-click="ctrl.cancel()">
+          <span ng-if="ctrl.action !== 'view'">Cancel</span>
+          <span ng-if="ctrl.action === 'view'">Close</span>
+        </button>
+        <button type="submit" ng-if="ctrl.action !== 'view'"
+                class="btn btn-primary text-capitalize"
+                ng-disabled="ctrl.form.$invalid"
+                ng-class="{
+                  'btn-danger': ctrl.action === 'delete' || ctrl.action === 'destroy'
+                }">
+          {{::ctrl.action || 'Add'}}
+        </button>
+      </div>
+    </div>
+  </fieldset>
+</form>

@@ -1,0 +1,135 @@
+<div class="modal-header modal-header primary">
+  <button type="button" class="close" ng-click="ctrl.cancel()" ng-disabled="ctrl.loading">
+    &times;
+  </button>
+  <h4 class="modal-title text-capitalize">
+    <i class="fa fa-fw {{::ctrl.icon}}"></i> 
+    {{::ctrl.action}} {{::ctrl.tableObject.title}}
+  </h4>
+</div>
+
+<form class="form-horizontal" ng-submit="ctrl.save()" name="ctrl.form">
+  <fieldset ng-disabled="ctrl.loading">
+
+    <div class="modal-body">
+
+      <div class="row mh-0">
+        <fieldset ng-disabled="ctrl.loading" style="width: 100%;">
+          <div class="form-group mh-0" ng-disabled="ctrl.loading">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search..."
+                     ng-model="ctrl.search.value">
+              <span class="input-group-btn">
+                <button class="btn btn-default" ng-click="ctrl.searchReload()">
+                  <i class="fa fa-fw fa-search"></i>
+                  <span class="hidden-xs">Search</span>
+                </button>
+              </span>
+              <span class="input-group-btn lpad">
+                <button class="btn btn-primary"
+                        ng-click="ctrl.tableReload()">
+                  <i class="fa fa-refresh fa-fw"></i>
+                  <span class="hidden-xs">Refresh</span>
+                </button>
+              </span>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="table-responsive">
+        <table ng-table="ctrl.tableParams"
+               ng-if="ctrl.tableData.length > 0"
+               class="table table-striped table-hover table-bordered">
+          <thead>
+            <tr>
+              <th width="2%">
+                <checkbox ng-model="ctrl.selected.checked">
+              </th>
+              <th>#</th>
+              <th ng-repeat="header in ctrl.tableFields"
+                  ng-click="ctrl.sortData(header)"
+                  sortable="{{header.sort}}"
+                  class="sortable">
+                {{::header.label}}
+                <i ng-if="header.sort === ctrl.sort.name && !!ctrl.sort.reversed"
+                   class="fa fa-fw fa-caret-up"></i>
+                <i ng-if="header.sort === ctrl.sort.name && !ctrl.sort.reversed"
+                   class="fa fa-fw fa-caret-down"></i>
+              </th>
+              <!-- <th class="text-center">Actions</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="data in ctrl.tableData"
+                ng-class="{'active': data.selected}">
+              <td width="2%">
+                <checkbox ng-model="ctrl.selected.items[data.objectId]">
+                </checkbox>
+                <!-- <a class="btn btn-link btn-sm" 
+                   ng-click="ctrl.toggleSelection(data)">
+                  <span ng-if="data.selected">
+                    <i class="fa fa-fw fa-lg fa-check-square"></i>
+                  </span>
+                  <span ng-if="!data.selected">
+                    <i class="fa fa-fw fa-lg fa-square-o"></i>
+                  </span>
+                </a> -->
+              </td>
+              <td>{{$index + ctrl.index + 1}}</td>
+              <td ng-repeat="field in ctrl.tableFields">
+                <div ng-switch on="field.type">
+                  <span ng-switch-when="date">{{ctrl.formatDate(field, data)}}</span>
+                  <span ng-switch-when="image">
+                    <img ng-src="{{ctrl.showImage(field, data)}}"
+                         alt="Add Image"
+                         height="30px"
+                         width="auto">
+                  </span>
+                  <span ng-switch-when="owner">
+                    {{ctrl.showOwner(field, data)}}
+                  </span>
+                  <span ng-switch-default>{{ctrl.showField(field, data)}}</span>
+                </div>
+              </td>
+              <!-- <td class="text-right">
+                <button title="View" class="btn btn-sm btn-default" 
+                        ng-click="ctrl.showDialog('view', data)">
+                  <i class="fa fa-lg fa-eye"></i>
+                </button>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="text-center" ng-if="ctrl.tableData.length < 1">
+        <div class="jumbotron" style="background-color: #fff;">
+          <h1 ng-if="!ctrl.loading" class="text-capitalize">
+            No {{::ctrl.active}} {{::ctrl.heading || 'Data'}} {{::ctrl.headingSub}}
+          </h1>
+          <h2 ng-if="ctrl.loading"><i class="fa fa-spinner fa-pulse"></i></h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <div class="text-right">
+        <span ng-show="ctrl.loading">
+          <i class="fa fa-fw fa-lg fa-spinner fa-pulse"></i>&nbsp; 
+        </span>
+        <button type="button" class="btn btn-default" ng-click="ctrl.cancel()">
+          <span ng-if="ctrl.action !== 'view'">Cancel</span>
+          <span ng-if="ctrl.action === 'view'">Close</span>
+        </button>
+        <button type="submit" ng-if="ctrl.action !== 'view' && ctrl.tableData.length > 0"
+                class="btn btn-primary text-capitalize"
+                ng-disabled="ctrl.form.$invalid">
+          <!-- {{::ctrl.action || 'Add'}} -->
+          Save
+        </button>
+      </div>
+    </div>
+
+  </fieldset>
+</form>

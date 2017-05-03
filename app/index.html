@@ -1,0 +1,120 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>EquipMan</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/ng-table/dist/ng-table.css" />
+    <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+    <link rel="stylesheet" href="bower_components/pikaday/css/pikaday.css" />
+    <link rel="stylesheet" href="bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css" />
+    <link rel="stylesheet" href="bower_components/flexboxgrid/dist/flexboxgrid.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="equipmanApp">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <div class="text-center center-center">
+      <i class="fa fa-spinner fa-pulse fa-5x"></i>
+      <span class="sr-only">Loading...</span>
+    </div>
+
+    <div id="main" class="animate-fade-in-out" ui-view="main"></div>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/api-check/dist/api-check.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-formly/dist/formly.js"></script>
+    <script src="bower_components/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.js"></script>
+    <script src="bower_components/ng-table/dist/ng-table.js"></script>
+    <script src="bower_components/ng-table-export/ng-table-export.js"></script>
+    <script src="bower_components/angular-base64-upload/src/angular-base64-upload.js"></script>
+    <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+    <script src="bower_components/pikaday/pikaday.js"></script>
+    <script src="bower_components/pikaday-angular/pikaday-angular.js"></script>
+    <script src="bower_components/nya-bootstrap-select/dist/js/nya-bs-select.js"></script>
+    <script src="bower_components/ngstorage/ngStorage.js"></script>
+    <script src="bower_components/angular-media-queries/match-media.js"></script>
+    <script src="bower_components/blob-polyfill/Blob.js"></script>
+    <script src="bower_components/file-saver.js/FileSaver.js"></script>
+    <script src="bower_components/angular-file-saver/dist/angular-file-saver.bundle.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <!-- <script type="text/javascript">
+          $('.dropdown-toggle').dropdown();
+        </script> -->
+        <script src="scripts/md5.js"></script>
+        <script src="scripts/directives/angular-bootstrap-checkbox.js"></script>
+
+        <script src="scripts/app.core.js"></script>
+
+        <script src="scripts/services/http_interceptor.js"></script>
+        <script src="scripts/services/backendless.js"></script>
+        <script src="scripts/rest.config.js"></script>
+        <script src="scripts/directives/em-formly.js"></script>
+
+        <script src="scripts/app/app.auth.js"></script>
+        <script src="scripts/app/app.home.js"></script>
+        <script src="scripts/app/app.profile.js"></script>
+        <script src="scripts/app/app.user.js"></script>
+        <script src="scripts/app/app.ministry.js"></script>
+        <script src="scripts/app/app.item.js"></script>
+        <script src="scripts/app/app.event.js"></script>
+        
+        <script src="scripts/app.app.js"></script>
+        <script src="scripts/app.index.js"></script>
+
+        <script src="scripts/services/main.service.js"></script>
+        <script src="scripts/services/auth.service.js"></script>
+        <script src="scripts/services/table.service.js"></script>
+        <script src="scripts/services/form.service.js"></script>
+        
+        <script src="scripts/controllers/main.controller.js"></script>
+        <script src="scripts/controllers/auth.controller.js"></script>
+        <script src="scripts/controllers/navigation.controller.js"></script>
+        <script src="scripts/controllers/profile.controller.js"></script>
+        <script src="scripts/controllers/table.controller.js"></script>
+        <script src="scripts/controllers/form_modal.controller.js"></script>
+        <script src="scripts/controllers/table_modal.controller.js"></script>
+        <script src="scripts/controllers/event_item.controller.js"></script>
+        <script src="scripts/controllers/event_item_tmodal.controller.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

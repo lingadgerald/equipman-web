@@ -1,0 +1,55 @@
+<div class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand" href="#/">
+        <!-- <span><img src="images/equipman.png" height="25px" width="auto"></span> -->
+        Equipman
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="js-navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="" class="dropdown-toggle nav-item" data-toggle="dropdown">
+            <i class="fa fa-user fa-fw"></i>
+            <span>
+              {{ctrl.currentUser.name || ctrl.currentUser.username || ctrl.currentUser.email}}
+            </span>
+            <i class="caret"></i>
+          </a>
+          <ul id="user-menu" class="dropdown-menu">
+            <li>
+              <a class="nav-item" ui-sref="app.profile">
+                <i class="fa fa-fw fa-user"></i>
+                Profile
+              </a>
+            </li>
+            <li>
+              <a href="" class="nav-item" ng-click="ctrl.logout()">
+                <i class="fa fa-fw fa-sign-out"></i>
+                Logout
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- <li><a href="" class="nav-item" ng-click="ctrl.logout()">Logout</a></li> -->
+      </ul>
+
+      <ul class="nav navbar-nav">
+        <li ng-repeat="nav in ctrl.navigation" ui-sref-active="active">
+          <a class="nav-item" ui-sref="{{::nav.state}}" ng-if="!!nav.state">
+            {{::nav.title}}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

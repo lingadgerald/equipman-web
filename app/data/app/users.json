@@ -1,0 +1,75 @@
+{
+	"name": "user",
+	"heading": "Users",
+	"title": "User",
+	"model": "user",
+	"tabs": [
+		{
+			"label": "Active",
+			"model": "active",
+			"buttons": [
+				{"label": "View", "model": "view", "icon": "fa-eye"},
+				{"label": "Edit", "model": "edit", "icon": "fa-pencil"},
+				{"label": "Delete", "model": "delete", "icon": "fa-trash-o"}
+			]
+		},
+		{
+			"label": "Inactive",
+			"model": "inactive",
+			"buttons": [
+				{"label": "View", "model": "view", "icon": "fa-eye"},
+				{"label": "Retrieve", "model": "retrieve", "icon": "fa-undo"},
+				{"label": "Delete", "model": "destroy", "icon": "fa-trash-o"}
+			]
+		}
+	],
+	"tableFields": [
+		{"label": "Name", "model": "name"},
+		{"label": "Email Address", "model": "email"}
+	],
+	"requiredFields": ["name", "email", "password"],
+	"formFields": [
+		{
+			"key": "firstname",
+			"type": "input-horizontal",
+			"templateOptions": {"type": "text", "label": "First Name", "required": true}
+		},
+		{
+			"key": "lastname",
+			"type": "input-horizontal",
+			"templateOptions": {"type": "text", "label": "Last Name", "required": true}
+		},
+		{
+			"key": "email",
+			"type": "input-horizontal",
+			"templateOptions": {"type": "email", "label": "Email Address", "required": true}
+		},
+		{
+			"key": "role",
+			"type": "select-horizontal",
+			"defaultValue": "user",
+			"templateOptions": {
+				"label": "Role",
+				"options": [
+					{"name": "User", "value": "user"},
+					{"name": "Admin", "value": "admin"},
+					{"name": "Head", "value": "head"}
+				]
+			}
+		},
+		{
+			"key": "password",
+			"type": "input-horizontal",
+			"templateOptions": {"type": "password", "label": "Password", "required": true},
+			"expressionProperties": {"templateOptions.disabled": "formState.action !== 'add'"},
+			"hideExpression": "formState.action !== 'add'"
+		},
+		{
+			"key": "password_confirmation",
+			"type": "input-horizontal",
+			"templateOptions": {"type": "password", "label": "Confirm Password", "required": true},
+			"expressionProperties": {"templateOptions.disabled": "formState.action !== 'add'"},
+			"hideExpression": "formState.action !== 'add'"
+		}
+	]
+}

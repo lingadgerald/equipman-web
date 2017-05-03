@@ -1,0 +1,169 @@
+<div class="container-fluid">
+
+	<div class="container-tab">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<div class="panel-title panel-header">
+					<a href=""
+						 ng-if="!!ctrl.backButton"
+						 ui-sref="{{ctrl.backButton}}">
+						<i class="fa fa-fw fa-arrow-left"></i>
+					</a>
+					{{::ctrl.heading}}
+				</div>
+			</div>
+
+			<div class="panel-body" style="padding: 0;">
+				<uib-tabset>
+					<uib-tab heading="{{tab.label}}"
+									 ng-repeat="tab in ctrl.tabs"
+									 ng-click="ctrl.tableReload(tab)">
+					</uib-tab>
+				</uib-tabset>
+
+				<div class="container-fluid panel-container">
+					<div class="row">
+						<div class="container-fluid">
+
+							<fieldset ng-disabled="ctrl.loading">
+								<div class="form-group" ng-disabled="ctrl.loading">
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="Search..."
+													 ng-model="ctrl.search.value">
+										<span class="input-group-btn">
+											<button class="btn btn-default" ng-click="ctrl.searchReload()">
+												<i class="fa fa-fw fa-search"></i>
+												<span class="hidden-xs">Search</span>
+											</button>
+										</span>
+										<span class="input-group-btn lpad"
+													ng-init="to.model = ctrl.tableObject.model">
+											<button class="btn btn-primary"
+															ng-click="ctrl.showDialog('add', {})"
+															ng-show="ctrl.active === 'active'">
+												<i class="fa fa-fw"
+														ng-class="{'fa-user-plus': to.model === 'member', 'fa-plus': to.model !== 'member'}"></i>
+												<span class="hidden-xs">Add {{::ctrl.title}}</span>
+											</button>
+											<button class="btn btn-primary"
+															ng-click="ctrl.showTableDialog('add', {})"
+															ng-show="!ctrl.active">
+												<i class="fa fa-fw"
+														ng-class="{'fa-user-plus': to.model === 'member', 'fa-plus': to.model !== 'member'}"></i>
+												<span class="hidden-xs">Add {{::ctrl.title}}</span>
+											</button>
+										</span>
+										<span class="input-group-btn lpad">
+											<button class="btn btn-primary"
+															ng-click="ctrl.tableReload({'model': ctrl.active})">
+												<i class="fa fa-refresh fa-fw"></i>
+												<span class="hidden-xs">Refresh</span>
+											</button>
+										</span>
+									</div>
+								</div>
+							</fieldset>
+
+						</div>
+					</div>
+
+					<div class="table-responsive">
+						<table ng-table="ctrl.tableParams"
+									 ng-if="ctrl.tableData.length > 0"
+									 class="table table-striped table-hover table-bordered">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th ng-repeat="header in ctrl.tableFields"
+											ng-click="ctrl.sortData(header)"
+											sortable="{{header.sort}}"
+											class="sortable">
+										{{::header.label}}
+										<i ng-if="header.sort === ctrl.sort.name && !!ctrl.sort.reversed"
+											 class="fa fa-fw fa-caret-up"></i>
+										<i ng-if="header.sort === ctrl.sort.name && !ctrl.sort.reversed"
+											 class="fa fa-fw fa-caret-down"></i>
+									</th>
+									<th class="text-center">Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="data in ctrl.tableData">
+									<td>{{$index + ctrl.index + 1}}</td>
+									<td ng-repeat="field in ctrl.tableFields">
+										<div ng-switch on="field.type">
+											<span ng-switch-when="date">{{ctrl.formatDate(field, data)}}</span>
+											<span ng-switch-when="image">
+												<img ng-src="{{ctrl.showImage(field, data)}}"
+														 alt="Add Image"
+														 height="30px"
+														 width="auto">
+											</span>
+											<span ng-switch-when="owner">
+												{{ctrl.showOwner(field, data)}}
+											</span>
+											<span ng-switch-default>{{ctrl.showField(field, data)}}</span>
+										</div>
+									</td>
+									<td class="text-right">
+										<button ng-if="ctrl.tableObject.model === 'event'"
+														ng-click="ctrl.showDialog('view', data)"
+														class="btn btn-sm btn-default text-uppercase"
+														title="Items">
+											<strong>Attendance</strong>
+										</button>
+										<button ng-if="ctrl.tableObject.model === 'event'"
+														ng-click="ctrl.changePage('app.events.items', {title: data.code, data: data})"
+														class="btn btn-sm btn-default text-uppercase"
+														title="Items">
+											<strong>Items</strong>
+										</button>
+										<button title="View" class="btn btn-sm btn-default" 
+														ng-click="ctrl.showDialog('view', data)">
+											<i class="fa fa-lg fa-eye"></i>
+										</button>
+										<button title="Edit" class="btn btn-sm btn-default"
+														ng-click="ctrl.showDialog('edit', data)"
+											 			ng-if="!data.deleted && ctrl.tableObject.model !== 'event_item'">
+											<i class="fa fa-lg fa-pencil"></i>
+										</button>
+										<button title="Retrieve" class="btn btn-sm btn-default"
+														ng-click="ctrl.showDialog('retrieve', data)"
+											 			ng-if="!!data.deleted">
+											<i class="fa fa-lg fa-undo"></i>
+										</button>
+										<button title="Delete" class="btn btn-sm btn-default"
+														ng-click="ctrl.showDialog('delete', data)"
+														ng-if="!data.deleted && ctrl.tableObject.model !== 'event_item'">
+											<i class="fa fa-lg fa-trash-o"></i>
+										</button>
+										<button title="Delete Forever" class="btn btn-sm btn-danger"
+														ng-click="ctrl.showDialog('destroy', data)"
+														ng-if="!!data.deleted">
+											<i class="fa fa-lg fa-trash-o"></i>
+										</button>
+										<button title="Delete" class="btn btn-sm btn-danger"
+														ng-click="ctrl.showDialog('destroy', data)"
+														ng-if="!data.deleted && ctrl.tableObject.model === 'event_item'">
+											<i class="fa fa-lg fa-trash-o"></i>
+										</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="text-center" ng-if="ctrl.tableData.length < 1">
+						<div class="jumbotron" style="background-color: #fff;">
+							<h1 ng-if="!ctrl.loading" class="text-capitalize">
+								No {{::ctrl.active}} {{::ctrl.heading}} {{::ctrl.headingSub}}
+							</h1>
+							<h2 ng-if="ctrl.loading"><i class="fa fa-spinner fa-pulse"></i></h2>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>

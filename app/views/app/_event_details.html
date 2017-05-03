@@ -1,0 +1,144 @@
+<div class="container-fluid">
+	<div class="page-header p-0 mt-0">
+		<div class="h2 mt-0">
+			<i style="cursor: pointer;" 
+				 ng-if="!!ctrl.backButton"
+				 ui-sref="{{ctrl.backButton}}"
+				 class="fa fa-fw fa-angle-left">
+			</i>
+			<i ng-if="!!ctrl.icon && !ctrl.backButton" class="fa fa-fw {{ctrl.icon}}"></i>
+			{{ctrl.heading}}
+		</div>
+	</div>
+	<div>
+		<div class="row">
+			<div class="container-fluid" style="width: 100%;">
+
+				<fieldset ng-disabled="ctrl.loading">
+					<div class="form-group" ng-disabled="ctrl.loading">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search..."
+										 ng-model="ctrl.search.value">
+							<span class="input-group-btn">
+								<button class="btn btn-default" ng-click="ctrl.searchReload()">
+									<i class="fa fa-fw fa-search"></i>
+									<span class="hidden-xs">Search</span>
+								</button>
+							</span>
+							<span class="input-group-btn lpad"
+										ng-init="to.model = ctrl.tableObject.model">
+								<button class="btn btn-primary"
+												ng-click="ctrl.showTableDialog('add')"
+												ng-show="ctrl.tab.model === 'items'"
+												ng-disabled="ctrl.expired">
+									<i class="fa fa-fw fa-plus"></i>
+									<span class="hidden-xs">Add {{::ctrl.title}}</span>
+								</button>
+							</span>
+							<span class="input-group-btn lpad">
+								<button class="btn btn-primary"
+												ng-click="ctrl.tableExport($event)">
+									<i class="fa fa-external-link fa-fw"></i>
+									<span class="hidden-xs">Export</span>
+								</button>
+							</span>
+							<span class="input-group-btn lpad">
+								<button class="btn btn-primary"
+												ng-click="ctrl.tableReload(ctrl.tab)">
+									<i class="fa fa-refresh fa-fw"></i>
+									<span class="hidden-xs">Refresh</span>
+								</button>
+							</span>
+						</div>
+					</div>
+				</fieldset>
+
+			</div>
+		</div>
+	</div>
+	<div class="panel with-nav-tabs panel-primary">
+		<div class="panel-heading">
+			<ul class="nav nav-tabs">
+				<li ng-repeat="tab in ctrl.tabs"
+						ng-class="{'active': tab.model === ctrl.active}">
+					<a href="" data-toggle="tab" ng-click="ctrl.tableReload(tab)"
+						 ng-class="{'disabled': tab.model === ctrl.active}">
+						{{tab.label}}
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="panel-body panel-container">
+
+			<div class="table-responsive">
+				<table ng-table="ctrl.tableParams"
+							 ng-if="ctrl.tableData.length > 0"
+							 class="table table-striped table-hover table-bordered table-condensed"
+							 export-csv="ctrl.helper.csv">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th ng-repeat="header in ctrl.tableFields"
+									ng-click="ctrl.sortData(header)"
+									sortable="{{header.sort}}"
+									class="sortable">
+								{{::header.label}}
+								<i ng-if="header.sort === ctrl.sort.name && !!ctrl.sort.reversed"
+									 class="fa fa-fw fa-caret-up"></i>
+								<i ng-if="header.sort === ctrl.sort.name && !ctrl.sort.reversed"
+									 class="fa fa-fw fa-caret-down"></i>
+							</th>
+							<th class="text-center">Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="data in ctrl.tableData | orderBy:ctrl.sort.name:ctrl.sort.reversed | filter:ctrl.search.query">
+							<td>{{$index + ctrl.index + 1}}</td>
+							<td ng-repeat="field in ctrl.tableFields">
+								<div ng-switch on="field.type">
+									<span ng-switch-when="date">{{ctrl.formatDate(field, data)}}</span>
+									<div ng-switch-when="image">
+										<img ng-src="{{ctrl.showImage(field, data)}}"
+												 alt="Image"
+												 height="30px"
+												 width="auto">
+									</div>
+									<span ng-switch-when="owner">
+										{{ctrl.showOwner(field, data)}}
+									</span>
+									<span ng-switch-when="itemLogs">
+										{{ctrl.showLog(field, data)}}
+									</span>
+									<span ng-switch-default>{{ctrl.showField(field, data)}}</span>
+								</div>
+							</td>
+							<td>
+								<div class="row m-0 around-xs">
+									<button title="{{btn.label}}"
+													class="btn btn-sm btn-default text-uppercase"
+													ng-repeat="btn in ctrl.tab.buttons"
+													ng-click="ctrl.onTableActionClicked(btn, data)"
+													ng-class="{'btn-danger': btn.model === 'destroy'}">
+										<strong ng-if="!btn.icon">{{btn.label}}</strong>
+										<i ng-if="!!btn.icon" class="fa fa-fw fa-lg {{btn.icon}}"></i>
+									</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="text-center" ng-if="ctrl.tableData.length < 1">
+				<div class="jumbotron" style="background-color: #fff;">
+					<h1 ng-if="!ctrl.loading" class="text-capitalize">
+						No {{::ctrl.active}} for {{::ctrl.heading}} {{::ctrl.headingSub}}
+					</h1>
+					<h2 ng-if="ctrl.loading"><i class="fa fa-spinner fa-pulse"></i></h2>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

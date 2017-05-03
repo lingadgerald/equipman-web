@@ -1,0 +1,19 @@
+{
+	"fields": [
+		{
+			"key": "login",
+			"type": "input-login",
+			"templateOptions": {"type": "text", "label": "Email Address"}
+		},
+		{
+			"key": "password",
+			"type": "input-login",
+			"templateOptions": {"type": "password", "label": "Password"}
+		},
+		{
+			"key": "remember",
+			"type": "checkbox-horizontal",
+			"templateOptions": {"label": "Remember Me?", "noPadding": true}
+		}
+	]
+}

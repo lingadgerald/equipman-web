@@ -1,0 +1,49 @@
+@import "bootstrap/bootstrap";
+
+.modal-body {
+	max-height: calc(100vh - 200px);
+	overflow-y: auto;
+}
+
+.modal-header {
+
+	&.primary {
+		background-color: $brand-primary;
+
+		.modal-title {
+			color: #fff;
+		}
+	}
+
+	&.success {
+		background-color: $brand-success;
+
+		.modal-title {
+			color: #fff;
+		}
+	}
+
+	&.info {
+		background-color: $brand-info;
+
+		.modal-title {
+			color: #fff;
+		}
+	}
+
+	&.warning {
+		background-color: $brand-warning;
+
+		.modal-title {
+			color: #fff;
+		}
+	}
+
+	&.danger {
+		background-color: $brand-danger;
+
+		.modal-title {
+			color: #fff;
+		}
+	}
+}

@@ -1,0 +1,54 @@
+{
+	"fields": [
+		{
+			"key": "user.name",
+			"type": "input-login",
+			"templateOptions": {"type": "text", "label": "Name"},
+			"expressionProperties": {
+				"templateOptions.disabled": "true"
+			}
+		},
+		{
+			"key": "user.firstname",
+			"type": "input-login",
+			"templateOptions": {"type": "hidden", "label": "First Name"},
+			"expressionProperties": {
+				"templateOptions.disabled": "true"
+			}
+		},
+		{
+			"key": "user.lastname",
+			"type": "input-login",
+			"templateOptions": {"type": "hidden", "label": "Last Name"},
+			"expressionProperties": {
+				"templateOptions.disabled": "true"
+			}
+		},
+		{
+			"key": "username",
+			"type": "input-login",
+			"templateOptions": {"type": "hidden", "label": "Username"},
+			"expressionProperties": {
+				"templateOptions.disabled": "true"
+			}
+		},
+		{
+			"key": "email",
+			"type": "input-login",
+			"templateOptions": {"type": "email", "label": "Email Address"},
+			"expressionProperties": {
+				"templateOptions.disabled": "true"
+			}
+		},
+		{
+			"key": "password",
+			"type": "input-login",
+			"templateOptions": {"type": "password", "label": "Password"}
+		},
+		{
+			"key": "passwordConfirmation",
+			"type": "input-login",
+			"templateOptions": {"type": "password", "label": "Confirm Password"}
+		}
+	]
+}
