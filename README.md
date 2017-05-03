@@ -9,6 +9,7 @@ Building the project
 
 ```sh
 $ npm install
+$ bower install
 $ grunt
 ```
 
