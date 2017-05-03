@@ -28,11 +28,12 @@
 	"tableFields": [
 		{"label": "Name", "model": "name", "sort": "name"},
 		{"label": "Email Address", "model": "email", "sort": "email"},
+		{"label": "Mobile Number", "model": "mobile", "sort": "mobile"},
 		{"label": "Ministry", "model": "ministry.name"},
 		{"label": "Role", "model": "role.name"},
 		{"label": "Activated At", "model": "activated", "type": "date"}
 	],
-	"requiredFields": ["name", "firstname", "lastname", "email", "ministry", "role"],
+	"requiredFields": ["name", "firstname", "lastname", "email", "ministry", "role", "mobile"],
 	"tableRelations": "ministry,role",
 	"searchFields": {
 		"name": {"cond": "cn"},
@@ -61,6 +62,14 @@
 			"key": "email",
 			"type": "input-horizontal",
 			"templateOptions": {"type": "email", "label": "Email Address", "required": true},
+			"expressionProperties": {
+				"templateOptions.disabled": "!!model.activated"
+			}
+		},
+		{
+			"key": "mobile",
+			"type": "input-horizontal",
+			"templateOptions": {"type": "text", "label": "Mobile Number", "required": true},
 			"expressionProperties": {
 				"templateOptions.disabled": "!!model.activated"
 			}

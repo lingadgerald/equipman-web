@@ -31,6 +31,11 @@
           "templateOptions": {"type": "text", "label": "Email Address", "disabled": true}
         },
         {
+          "key": "mobile",
+          "type": "input-horizontal-less",
+          "templateOptions": {"type": "text", "label": "Mobile Number"}
+        },
+        {
           "key": "ministry.name",
           "type": "input-horizontal-less",
           "templateOptions": {"type": "text", "label": "Ministry", "disabled": true},
