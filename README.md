@@ -5,7 +5,18 @@ version 0.11.1.
 
 ## Build & development
 
-Run `grunt` for building and `grunt serve` for preview.
+Building the project
+
+```sh
+$ npm install
+$ grunt
+```
+
+To preview
+
+```sh
+$ grunt serve
+```
 
 ## Testing
 
