@@ -1,0 +1,36 @@
+<div class="modal-header primary">
+  <button type="button" class="close" ng-click="cancel()" ng-disabled="loading">
+    &times;
+  </button>
+  <h4 class="modal-title">
+    <i class="fa fa-fw fa-download"></i> Download APK
+  </h4>
+</div>
+
+<div class="modal-body">
+  <div class="row">
+    <div class="col col-md-6 text-center">
+      <a class="btn btn-link"
+        ng-href="{{downloadLink}}/equipman_armv7.apk"
+        target="_self"
+        download="equipman_armv7.apk"
+      >
+        Equipman armv7
+      </a>
+    </div>
+    <div class="col col-md-6 text-center">
+      <a class="btn btn-link"
+        ng-href="{{downloadLink}}/equipman_x86.apk"
+        target="_self"
+        download="equipman_x86.apk"
+      >
+        Equipman x86
+      </a>
+    </div>
+  </div>
+  <div class="p-15">
+    <p>
+      <em>If you see a <b>Mismatch of CPU Architecture</b> message after installing the file. <br>Please download the other one.</em>
+    </p>
+  </div>
+</div>

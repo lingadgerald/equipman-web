@@ -7,6 +7,16 @@
 		self.$http = $http;
 		self.$localStorage = $localStorage;
 		self.data = {};
+		self.downloadLink = [
+			'https://develop.backendless.com',
+			'/3.x',
+			'/console',
+			'/{applicationId}',
+			'/appversion',
+			'/A65CE0E2-01FD-BF1C-FF1B-14B4E6B0A200',
+			'/dtwqbrwkqkppjccbcfftkeislmpuehbdrscj',
+			'/files/download/downloads'
+		].join('').format(Backendless.keys);
 		// self.imageLink = '{apiUrl}/{applicationId}/{version}/files/images'.format(Backendless.keys);
 	};
 	MainService.$inject = ['Backendless', '$q', '$http', '$localStorage'];

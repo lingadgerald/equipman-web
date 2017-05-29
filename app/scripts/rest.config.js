@@ -22,6 +22,9 @@
 		BackendlessProvider.register('file.image', 'files/binary/images');
 
 		BackendlessProvider.register('bulk.item', 'data/bulk/Items');
+
+		BackendlessProvider.register('file.equipman_armv7', 'files/downloads/equipman_armv7.apk');
+		BackendlessProvider.register('file.equipman_x86', 'files/downloads/equipman_x86.apk');
 	};
 	Config.$inject = ['BackendlessProvider'];
 
